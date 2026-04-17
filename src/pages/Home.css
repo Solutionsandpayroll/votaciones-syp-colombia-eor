@@ -83,6 +83,39 @@
   color: #1e40af;
 }
 
+/* ── Votaciones cerradas ───────────────────────────── */
+.voting-closed {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 24px;
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.voting-closed-icon {
+  color: #16a34a;
+  opacity: 0.85;
+}
+
+.voting-closed-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #15803d;
+  margin: 0;
+}
+
+.voting-closed-msg {
+  font-size: 15px;
+  color: #166534;
+  line-height: 1.6;
+  margin: 0;
+}
+
 /* ── Módulos ───────────────────────────────────────── */
 .modules-grid {
   width: 100%;

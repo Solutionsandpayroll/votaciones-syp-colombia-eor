@@ -1,7 +1,11 @@
 ﻿import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useVoting } from '../context/VotingContext'
-import { Info } from 'lucide-react'
+import { Info, Lock } from 'lucide-react'
+
+// ─── Cambiar a false para reabrir las votaciones ──────────────────────────────
+const VOTACIONES_CERRADAS = true
+// ─────────────────────────────────────────────────────────────────────────────
 import Button from '../components/Button'
 import './Home.css'
 
@@ -45,31 +49,44 @@ export default function Home() {
           <p className="home-subtitle">S&P Colombia &mdash; Elecciones 2026</p>
         </div>
 
-        <p className="home-instruction">Seleccione el comité al que desea votar</p>
+        {VOTACIONES_CERRADAS ? (
+          <div className="voting-closed">
+            <Lock size={48} className="voting-closed-icon" />
+            <h2 className="voting-closed-title">Votaciones cerradas</h2>
+            <p className="voting-closed-msg">
+              El período de votación ha finalizado.<br />
+              ¡Gracias por tu participación!
+            </p>
+          </div>
+        ) : (
+          <>
+            <p className="home-instruction">Seleccione el comité al que desea votar</p>
 
-        <div className="home-notice">
-          <Info size={15} strokeWidth={2.2} className="home-notice-icon" />
-          <span>Recuerda que debes votar en <strong>ambos comités</strong> por separado.</span>
-        </div>
+            <div className="home-notice">
+              <Info size={15} strokeWidth={2.2} className="home-notice-icon" />
+              <span>Recuerda que debes votar en <strong>ambos comités</strong> por separado.</span>
+            </div>
 
-        <div className="modules-grid">
-          {MODULES.map(mod => (
-            <button
-              key={mod.key}
-              className="module-card"
-              onClick={() => handleSelectModule(mod.key)}
-            >
-              <div className="module-card-text">
-                <span className="module-label">
-                  {mod.label}
-                  {mod.abbr && <span className="module-abbr">{mod.abbr}</span>}
-                </span>
-                <span className="module-desc">{mod.desc}</span>
-              </div>
-              <span className="module-arrow" aria-hidden="true">&#8594;</span>
-            </button>
-          ))}
-        </div>
+            <div className="modules-grid">
+              {MODULES.map(mod => (
+                <button
+                  key={mod.key}
+                  className="module-card"
+                  onClick={() => handleSelectModule(mod.key)}
+                >
+                  <div className="module-card-text">
+                    <span className="module-label">
+                      {mod.label}
+                      {mod.abbr && <span className="module-abbr">{mod.abbr}</span>}
+                    </span>
+                    <span className="module-desc">{mod.desc}</span>
+                  </div>
+                  <span className="module-arrow" aria-hidden="true">&#8594;</span>
+                </button>
+              ))}
+            </div>
+          </>
+        )}
 
         {sucursal === "S&P" && (
           <button
